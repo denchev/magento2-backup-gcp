@@ -1,0 +1,28 @@
+{
+    "name": "htmlprt/cloudstorage",
+    "description": "A Magento 2 module that allows regular (daily, weekly, monthly) backups of data (media files, database) to a Google Cloud Platform (GCP) Cloud Storage account.",
+    "require": {
+        "php": "~7.3.0||~7.4.0"     
+    },
+    
+    "type": "magento2-module",
+    "license": [
+        "MIT",
+    ],
+    "authors": [
+        {
+            "name": "Marush Denchev",
+            "email": "marush.denchev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Htmlpet\\CloudStorage\\": ""
+        }
+    },
+    "version": "1.0.0"
+}
