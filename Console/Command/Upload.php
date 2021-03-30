@@ -7,11 +7,20 @@ use Symfony\Component\Console\Input\InputOption;
 use Htmlpet\CloudStorage\Client\GoogleCloudPlatform;
 
 /**
- * To do: Enable Object versioning
+ * To do: 
+ * 
+ * Enable Object versioning in GCP
+ * Use Manager to get the proper cloud client
+ * 
  */
 
 class Upload extends \Symfony\Component\Console\Command\Command
 {
+    /**
+     * @var \Htmlpet\CloudStorage\Client\GoogleCloudPlatform
+     */
+    private $gcp;
+
     /**
      * @var \Magento\Backup\Helper\Data
      */
@@ -23,16 +32,14 @@ class Upload extends \Symfony\Component\Console\Command\Command
     private $backupFactory;
 
     /**
-     * @param \Magento\Catalog\Api\ProductAttributeRepositoryInterface $productAttributeRepository
-     * @param \Magento\Catalog\Model\ResourceModel\Attribute $attributeResource
-     * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param \Magento\Framework\App\State $appState
-     * @param \Magento\Framework\EntityManager\MetadataPool $metadataPool
+     * @param \Magento\Framework\Backup\Factory $backupFactory
+     * @param \Magento\Backup\Helper\Data $backupData
+     * @param GoogleCloudPlatform $gcp
      */
     public function __construct(
         \Magento\Framework\Backup\Factory $backupFactory,
         \Magento\Backup\Helper\Data $backupData,
-        GoogleCloudPlatform $gcp
+        \Htmlpet\CloudStorage\Client\GoogleCloudPlatform $gcp
     ) {
         $this->backupFactory = $backupFactory;
         $this->backupData = $backupData;
