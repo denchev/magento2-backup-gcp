@@ -39,8 +39,8 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
     {
         $output->writeln("Backup started");
 
-        $destination = $this->createBackup();
-        //$destination = $this->backupData->getBackupsDir() . '/123_db.sql';
+        //$destination = $this->createBackup();
+        $destination = $this->backupData->getBackupsDir() . '/123_db.sql';
 
         $output->writeln("Backup created");
 
@@ -55,7 +55,10 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
         $projectId = $input->getOption('projectId');
         $bucketId = $input->getOption('bucketId');
 
-        $this->uploadToCloud($projectId, $bucketId, $archiveDestionation);
+        $this->uploadToCloud([
+            'projectId' => $projectId, 
+            'bucketId' => $bucketId
+        ], $archiveDestionation);
         
         $output->writeln("Upload to Google Cloud finished");
 
@@ -63,9 +66,9 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
         unlink($archiveDestionation);
     }
 
-    protected function uploadToCloud(string $projectId, string $bucketId, string $what)
+    protected function uploadToCloud(array $options, string $what)
     {
-        $this->client->initialize($projectId, $bucketId);
+        $this->client->initialize($options);
         $this->client->upload($what);
     }
 }

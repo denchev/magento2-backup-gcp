@@ -16,7 +16,10 @@ class GoogleCloudPlatform implements ClientInterface
         $this->directoryList = $directoryList;
     }
 
-    public function initialize($projectId, $bucketId) {
+    public function initialize($options) {
+        $projectId = $options['projectId'];
+        $bucketId = $options['bucketId'];
+
         $keyFilePath = $this->directoryList->getPath('var') . '/google-cloud-keys.json';
         $storage = new StorageClient([
             'keyFilePath' => $keyFilePath,
@@ -32,5 +35,4 @@ class GoogleCloudPlatform implements ClientInterface
             fopen($what, 'r')
         );
     }
-    
 }

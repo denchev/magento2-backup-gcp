@@ -16,10 +16,17 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
         $this->setDescription('Upload backup to Amazon S3');
 
         $this->addOption(
-            'projectId',
+            'key',
             null,
             InputOption::VALUE_REQUIRED,
-            'ProjectId'
+            'Key'
+        );
+
+        $this->addOption(
+            'secret',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Secret'
         );
 
         $this->addOption(
@@ -27,6 +34,13 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
             null,
             InputOption::VALUE_REQUIRED,
             'BucketId'
+        );
+
+        $this->addOption(
+            'region',
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Region'
         );
 
         parent::configure();
@@ -39,8 +53,8 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
     {
         $output->writeln("Backup started");
 
-        $destination = $this->createBackup();
-        //$destination = $this->backupData->getBackupsDir() . '/123_db.sql';
+        //$destination = $this->createBackup();
+        $destination = $this->backupData->getBackupsDir() . '/123_db.sql';
 
         $output->writeln("Backup created");
 
@@ -52,10 +66,17 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
 
         $output->writeln("Upload to Google Cloud begins");
 
-        $projectId = $input->getOption('projectId');
+        $key = $input->getOption('key');
+        $secret = $input->getOption('secret');
         $bucketId = $input->getOption('bucketId');
+        $region = $input->getOption('region');
 
-        $this->uploadToCloud($projectId, $bucketId, $archiveDestionation);
+        $this->uploadToCloud([
+            'key' => $key,
+            'secret' => $secret,
+            'bucketId' => $bucketId,
+            'region' => $region
+        ], $archiveDestionation);
         
         $output->writeln("Upload to Google Cloud finished");
 
@@ -63,9 +84,9 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
         unlink($archiveDestionation);
     }
 
-    protected function uploadToCloud(string $projectId, string $bucketId, string $what)
+    protected function uploadToCloud(array $options, string $what)
     {
-        $this->client->initialize($projectId, $bucketId);
+        $this->client->initialize($options);
         $this->client->upload($what);
     }
     

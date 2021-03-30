@@ -10,23 +10,30 @@ class AmazonS3 implements ClientInterface
 {
     private $s3;
 
-    public function initialize($projectId, $bucketId) {
-        $key = 'AKIA3A2O4ETLUY4EOGEG';
-        $secret = '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';
+    private $bucketId;
+
+    public function initialize($options) 
+    {    
+        $key = $options['key'];
+        $secret = $options['secret'];
+        $region = $options['region'];
+        $bucketId = $options['bucketId'];
+
+        $this->bucketId = $bucketId;
 
         $credentials = new \Aws\Credentials\Credentials($key, $secret);
 
         $this->s3 = new S3Client([
             'version' => 'latest',
-            'region' => 'eu-west-1',
+            'region' => $region,
             'credentials' => $credentials
         ]);
     }
 
-    public function upload($what) {
-
+    public function upload($what)
+    {
         $this->s3->putObject([
-            'Bucket' => 'mdenchevimages',
+            'Bucket' => $this->bucketId,
             'Key' => basename($what),
             'SourceFile' => $what
         ]);
