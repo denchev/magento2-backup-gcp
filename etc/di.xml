@@ -3,8 +3,21 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="htmlpetCloudStorageUpload" xsi:type="object">Htmlpet\CloudStorage\Console\Command\Upload</item>
+                <item name="htmlpetCloudStorageGcpUpload" xsi:type="object">Htmlpet\CloudStorage\Console\Command\Gcp\Upload</item>
+                <item name="htmlpetCloudStorageAmazonS3Upload" xsi:type="object">Htmlpet\CloudStorage\Console\Command\S3\Upload</item>
             </argument>
+        </arguments>
+    </type>
+
+    <type name="Htmlpet\CloudStorage\Console\Command\Gcp\Upload">
+        <arguments>
+            <argument name="client" xsi:type="object">Htmlpet\CloudStorage\Client\GoogleCloudPlatform</argument>
+        </arguments>
+    </type>
+
+    <type name="Htmlpet\CloudStorage\Console\Command\S3\Upload">
+        <arguments>
+            <argument name="client" xsi:type="object">Htmlpet\CloudStorage\Client\AmazonS3</argument>
         </arguments>
     </type>
 </config>

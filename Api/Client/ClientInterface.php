@@ -1,5 +1,5 @@
 <?php
-namespace Htmlpet\CloudStorage\Client;
+namespace Htmlpet\CloudStorage\Api\Client;
 
 interface ClientInterface {
     public function initialize($projectId, $bucketId);

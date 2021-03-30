@@ -2,6 +2,7 @@
 namespace Htmlpet\CloudStorage\Client;
 
 use Google\Cloud\Storage\StorageClient;
+use Htmlpet\CloudStorage\Api\Client\ClientInterface;
 
 class GoogleCloudPlatform implements ClientInterface
 {

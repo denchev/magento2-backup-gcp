@@ -3,7 +3,8 @@
     "description": "A Magento 2 module that allows regular (daily, weekly, monthly) backups of data (media files, database) to a Google Cloud Platform (GCP) Cloud Storage account.",
     "require": {
         "php": "~7.3.0||~7.4.0",
-        "google/cloud-storage": "^1.23"     
+        "google/cloud-storage": "^1.23",
+        "aws/aws-sdk-php": "^3.176"
     },
     
     "type": "magento2-module",
