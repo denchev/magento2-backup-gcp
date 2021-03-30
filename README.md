@@ -10,3 +10,7 @@ Version 2:
 
 Version 3:
 - Some level of restoration capabilities
+
+Usage:
+ - Create credentials file, name it "google-cloud-keys.json" and put it inside "var/" folder. Make sure it is not readable from outside!
+ - php bin/magento htmlpet:backup:gcp:upload --projectId '{projectId}' --bucketId '{bucketId}'
