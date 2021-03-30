@@ -4,7 +4,7 @@ namespace Htmlpet\CloudStorage\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Google\Cloud\Storage\StorageClient;
+use Htmlpet\CloudStorage\Client\GoogleCloudPlatform;
 
 /**
  * To do: Enable Object versioning
@@ -32,11 +32,11 @@ class Upload extends \Symfony\Component\Console\Command\Command
     public function __construct(
         \Magento\Framework\Backup\Factory $backupFactory,
         \Magento\Backup\Helper\Data $backupData,
-        \Magento\Framework\Filesystem\DirectoryList $directoryList
+        GoogleCloudPlatform $gcp
     ) {
         $this->backupFactory = $backupFactory;
         $this->backupData = $backupData;
-        $this->directoryList = $directoryList;
+        $this->gcp = $gcp;
 
         parent::__construct();
     }
@@ -120,16 +120,8 @@ class Upload extends \Symfony\Component\Console\Command\Command
 
     protected function uploadToCloud(string $projectId, string $bucketId, string $what)
     {
-
-        $keyFilePath = $this->directoryList->getPath('var') . '/google-cloud-keys.json';
-        $storage = new StorageClient([
-            'keyFilePath' => $keyFilePath,
-            'projectId' => $projectId
-        ]);
-        $bucket = $storage->bucket($bucketId);
-        $bucket->upload(
-            fopen($what, 'r')
-        );
+        $this->gcp->initialize($projectId, $bucketId);
+        $this->gcp->upload($what);
     }
 
     protected function createArchive(string $source)
