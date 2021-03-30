@@ -53,8 +53,8 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
     {
         $output->writeln("Backup started");
 
-        //$destination = $this->createBackup();
-        $destination = $this->backupData->getBackupsDir() . '/123_db.sql';
+        $destination = $this->createBackup();
+        //$destination = $this->backupData->getBackupsDir() . '/123_db.sql';
 
         $output->writeln("Backup created");
 
@@ -64,7 +64,7 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
 
         $output->writeln("Backup archive created");
 
-        $output->writeln("Upload to Google Cloud begins");
+        $output->writeln("Upload to Amazon S3 begins");
 
         $key = $input->getOption('key');
         $secret = $input->getOption('secret');
@@ -78,7 +78,7 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
             'region' => $region
         ], $archiveDestionation);
         
-        $output->writeln("Upload to Google Cloud finished");
+        $output->writeln("Upload to Amazon S3 finished");
 
         // Clean up
         unlink($archiveDestionation);

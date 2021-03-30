@@ -39,8 +39,8 @@ class Upload extends \Htmlpet\CloudStorage\Console\Command\AbstractUpload
     {
         $output->writeln("Backup started");
 
-        //$destination = $this->createBackup();
-        $destination = $this->backupData->getBackupsDir() . '/123_db.sql';
+        $destination = $this->createBackup();
+        //$destination = $this->backupData->getBackupsDir() . '/123_db.sql';
 
         $output->writeln("Backup created");
 
