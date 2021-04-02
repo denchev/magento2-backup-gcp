@@ -20,4 +20,8 @@
             <argument name="client" xsi:type="object">Htmlpet\CloudStorage\Client\AmazonS3</argument>
         </arguments>
     </type>
+
+    <type name="Magento\Backup\Model\Db">
+        <plugin name="backup_model_db" type="Htmlpet\CloudStorage\Plugin\Upload" />
+    </type>
 </config>
