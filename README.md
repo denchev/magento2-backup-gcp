@@ -14,3 +14,4 @@ Version 3:
 Usage:
  - Create credentials file, name it "google-cloud-keys.json" and put it inside "var/" folder. Make sure it is not readable from outside!
  - php bin/magento htmlpet:backup:gcp:upload --projectId '{projectId}' --bucketId '{bucketId}'
+ - php bin/magento htmlpet:backup:s3:upload --key {key} --secret '{secret}' --bucketId '{bucketId}' --region '{region}'
