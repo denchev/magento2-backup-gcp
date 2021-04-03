@@ -1,5 +1,5 @@
 # magento2-backup-gcp
-A Magento 2 module that allows regular (daily, weekly, monthly) backups of data (media files, database) to a Google Cloud Platform (GCP) Cloud Storage account.
+A Magento 2 module that allows regular (daily, weekly, monthly) backups of data (media files, database) to a Google Cloud Platform (GCP) Cloud Storage account. Also automatic backup of database to your Amazon S3 account (if you are using remote storage).
 
 Version 1:
 - CLI only
